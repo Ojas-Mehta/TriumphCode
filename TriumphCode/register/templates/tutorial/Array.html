@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>1-D Array</title>
+</head>
+<body>
+        <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+	<div class="center"><h1>One-Dimensional Array </h1></div>
+	<div class="boxing">
+        <h2>Introduction</h2>
+                <p>An array is a sequential collection of elements of same data type and stores data elements in a continuous memory location. The elements of an array are accessed by using an index. The index of an array of size N can range  from 0 to N−1. For example, if your array size is 5, then your index will range from 0 to 4 (5-1). Each element of an array can be accessed by using arr[index]. </p>
+<p>Consider following array. The size of this array is 5. If you want to access 12, then you can access it by using arr[ 1 ] i.e. 12.</p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/58ceb07.png"/></p>
+<h2>Array declaration</h2>
+<p>Declaring an array is language-specific.</p>
+<p>For example, in C/C++, to declare an array, you must specify, the following:</p>
+<ul>
+<li>
+<p>Size of the array: This defines the number of elements that can be
+   stored in the array.  </p>
+</li>
+<li>
+<p>Type of array: This defines the type of each element i.e. number,
+   character, or any other data type.</p>
+</li>
+</ul>
+<p>A C++ example would be:</p>
+<pre><code>int arr[5];
+</code></pre>
+<p>This is a static array and the other kind is dynamic array, where type is just enough for declaration. In dynamic arrays, size increases as more elements are added to the array.</p>
+<h2>Array Initialization:</h2>
+<p>Array can be initialized either at the time of declaration or after that.</p>
+<p>The sample format if an array is initialized at the time of declaration is</p>
+<pre><code>type arr[size] = {elements}
+</code></pre>
+<p>The sample format of an array that is initialized in C++, is </p>
+<pre><code>int arr[5] = {4, 12, 7, 15, 9};
+</code></pre>
+<p>An array can be initialized after declaration by assigning values to each index of the array as follows</p>
+<pre><code> type arr[size]
+ arr[index] = 12
+</code></pre>
+<p>C++ example:</p>
+<pre><code>int arr[5];
+arr[0] = 4;
+arr[1] = 12;
+</code></pre>
+<h2>Processing an Array</h2>
+<p>The most basic form of processing an array is to loop over the array and print all its elements.</p>
+<p>A sample of processing an array by looping over the array and printing its elements is as follows:</p>
+<pre><code>type arr[size] = {elements}
+for idx from 0 to size
+    print arr[idx]
+</code></pre>
+<p>C++ example:  </p>
+<div class="boxed"><font size="4"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    // Array declaration and initialization
+    int arr[5] = {4, 12, 7, 15, 9};
+    // Iterate over the array
+    for(int idx=0; idx&lt;5; idx++)
+    {
+        // Print out each element in a new line
+        cout &lt;&lt; arr[idx] &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre></div></font>
+</div></body>
+</html>

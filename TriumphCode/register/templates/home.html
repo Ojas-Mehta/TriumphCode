@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>TriumphCode</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/skel.min.js' %}"></script>
+		<script src="{% static 'js/skel-layers.min.js' %}"></script>
+		<script src="{% static 'js/init.js' %}"></script>
+
+			<link rel="stylesheet" href="{% static 'css/skel.css' %}" />
+			<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+			<link rel="stylesheet" href="{% static 'css/style-xlarge.css' %}" />
+
+	<style>
+		body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+		#one {
+    		background-color: #ebebe0;
+		}
+	</style>
+
+	</head>
+
+	<body id="top">
+
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h2>TRIUMPH CODE</h2>
+					<p>Learn, Code, Compete & Win.</p>
+					<form class="actions" method="GET">
+
+						<button type="submit" class="button big special" formaction="register/login">Login</button>
+						<button type="submit" class="button big alt" formaction="register/signup">Sign Up</button>
+
+
+					</form>
+				</div>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style1">
+				<header class="major">
+					<h2>A Coding Platform</h2>
+
+				</header>
+				<div class="container">
+					<div class="row">
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-area-chart major"></i>
+								<h3>Compile and Run</h3>
+								<p>An online integrated development environment to execute your code in your desired programming language.</p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-refresh major"></i>
+								<h3>Solve Questions</h3>
+								<p>Practice the question based on their difficulty level from various sub-domains of programming.</p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-cog major"></i>
+								<h3>Compete</h3>
+								<p>Jump in the arena. Compete with other coders in various competitions and prove your mettle.</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<script>
+
+				const isValidElement = element => {
+				return element.name && element.value;
+				};
+
+				const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+
+				if (isValidElement(element)) {
+					data[element.name] = element.value;
+				}
+
+				return data;
+
+				}, {});
+
+				const handleFormSubmit = event => {
+
+					event.preventDefault();
+					const data = formToJSON(form.elements);
+					const dataContainer = document.getElementsByClassName('results__display')[0];
+					dataContainer.textContent = JSON.stringify(data, null, "  ");
+				};
+				const form = document.getElementsByClassName('results__display')[0];
+				form.addEventListener('submit', handleFormSubmit);
+
+
+			</script>
+
+
+
+
+	</body>
+</html>

@@ -1,0 +1,251 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Basics Bit Manupulation</title>
+</head>
+<body>
+        <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+	<div class="center"><h1>Basics of Bit Manipulation</h1></div>
+	<div class="boxing">
+       <h2>Introduction</h2>
+    <p>
+		<p>Working on bytes, or data types comprising of bytes like ints, floats, doubles or even data structures which stores large amount of bytes is normal for a programmer. In some cases, a programmer needs to go beyond this - that is to say that in a deeper level where the importance of bits is realized.  </p>
+<p>Operations with bits are used in <strong>Data compression</strong> (data is compressed by converting it from one representation to another, to reduce the space) ,<strong>Exclusive-Or Encryption</strong> (an algorithm to encrypt the data for safety issues). In order to encode, decode or compress files we have to extract the data at bit level. Bitwise Operations are faster and closer to the system and sometimes optimize the program to a good level.  </p>
+<p>We all know that 1 byte comprises of 8 bits and  any integer or character can be represented using bits in computers, which we call its binary form(contains only 1 or 0) or in its base 2 form.<br />
+<h3>Example:</h3><br>
+<div class="boxed"><font size="4"><pre><code>
+1)  14 = {1110 }<sub>2</sub><br />
+          = 1 * 2<sup>3</sup> + 1 * 2<sup>2</sup> + 1 * 2<sup>1</sup> + 0 * 2<sup>0</sup><br />
+          = 14.   </p>
+<p>2)  20 = {10100 }<sub>2</sub><br />
+          = 1 * 2<sup>4</sup> + 0 * 2<sup>3</sup> + 1 * 2<sup>2</sup> + 0 * 2<sup>1</sup> + 0 * 2<sup>0</sup><br />
+          = 20.  </p>
+      </code></pre></font></div><br>
+<p>For characters, we use ASCII representation, which are in the form of integers which again can be represented using bits as explained above.  </p>
+<h3>Bitwise Operators:</h3>
+<p>There are different bitwise operations used in the bit manipulation. These bit operations operate on the individual bits of the bit patterns. Bit operations are fast and can be used in optimizing time complexity. Some common bit operators are:  </p>
+<p><strong>NOT ( ~ ):</strong> Bitwise NOT is an unary operator that flips the bits of the number i.e., if the ith bit is 0, it will change it to 1 and vice versa. Bitwise NOT is nothing but simply the one’s complement of a number. Lets take an example. <br />
+      N = 5 = (101)<sub>2</sub> <br />
+    ~N = ~5 = ~(101)<sub>2</sub> = (010)<sub>2</sub> = 2  </p>
+<p><strong>AND ( &amp; ):</strong> Bitwise AND is a binary operator that operates on two equal-length bit patterns. If both bits in the compared position of the bit patterns are 1, the bit in the resulting bit pattern is 1, otherwise 0.<br />
+    A = 5 = (101)<sub>2</sub> , B = 3 = (011)<sub>2</sub> 
+    A &amp; B = (101)<sub>2</sub> &amp; (011)<sub>2</sub>= (001)<sub>2</sub> = 1    </p>
+<p><strong>OR ( | ):</strong> Bitwise OR is also a binary operator that operates on two equal-length bit patterns, similar to bitwise AND. If both bits in the compared position of the bit patterns are 0, the bit in the resulting bit pattern is 0, otherwise 1.<br />
+    A = 5 = (101)<sub>2</sub> , B = 3 = (011)<sub>2</sub><br />
+    A | B = (101)<sub>2</sub> | (011)<sub>2</sub> = (111)<sub>2</sub> = 7  </p>
+<p><strong>XOR ( ^ ):</strong> Bitwise XOR  also takes two equal-length bit patterns. If both bits in the compared position of the bit patterns are 0 or 1, the bit in the resulting bit pattern is 0, otherwise 1.<br />
+    A = 5 = (101)<sub>2</sub> , B = 3 = (011)<sub>2</sub><br />
+    A ^ B = (101)<sub>2</sub> ^ (011)<sub>2</sub> = (110)<sub>2</sub> = 6  </p>
+<p><strong>Left Shift ( &lt;&lt; ):</strong> Left shift operator is a binary operator which shift the some number of bits, in the given bit pattern, to the left and append 0 at the end. Left shift is equivalent to multiplying the bit pattern with $$2^k$$ ( if we are shifting k bits ).<br />
+    1 &lt;&lt; 1 = 2 = 2<sup>1</sup><br />
+    1 &lt;&lt; 2 = 4 = 2<sup>2</sup> 
+    1 &lt;&lt; 3 = 8 = 2<sup>3</sup><br />
+    1 &lt;&lt; 4 = 16 = 2<sup>4</sup> <br />
+    …<br />
+    1 &lt;&lt; n = 2<sup>n</sup> </p>
+<p><strong>Right Shift ( &gt;&gt; ):</strong> Right shift operator is a binary operator which shift the some number of bits, in the given bit pattern, to the right and append 1 at the end. Right shift is equivalent to dividing the bit pattern with 2k ( if we are shifting k bits ).<br />
+    4 &gt;&gt; 1 = 2<br />
+    6 &gt;&gt; 1 = 3<br />
+    5 &gt;&gt; 1 = 2<br />
+    16 &gt;&gt; 4 = 1  </p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/https://he-s3.s3.amazonaws.com/media/uploads/cb985c2.png" /></p>
+<p>Bitwise operators are good for saving space and sometimes to cleverly remove dependencies.   </p>
+<p>Note: All left and right side taken in this article, are taken with reference to the reader.  </p>
+<p>Lets discuss some algorithms based on bitwise operations:  </p>
+<h3>1)  How to check if a given number is a power of 2 ?</h3><br>
+Consider a number N and you need to find if N is a power of 2. Simple solution to this problem is to repeated divide N by 2 if N is even. If we end up with a 1 then N is power of 2, otherwise not. There are a special case also. If N = 0 then it is not a power of 2. Let’s code it.</p>
+<h2>Implementation:</h2><br>
+<div class="boxed"><font size="4"><pre><code> bool isPowerOfTwo(int x)
+    {
+        if(x == 0)
+            return false;
+        else
+        {
+            while(x % 2 == 0) x /= 2;
+            return (x == 1);
+            }
+    }
+</code></pre></font></div><br>
+<p>Above function will return true if x is a power of 2, otherwise false.<br />
+Time complexity of the above code is <strong>O(logN)</strong>.  </p>
+<p>The same problem can be solved using bit manipulation. Consider a number x that we need to check for being a power for 2. Now think about the binary representation of (x-1). (x-1) will have all the bits same as x, except for the rightmost 1 in x and all the bits to the right of the rightmost 1. <br />
+<div class="boxed"><font size="4"><pre><code>
+Let, x = 4 = (100)<sub>2</sub><br />
+x - 1 = 3 = (011)<sub>2</sub><br />
+Let, x = 6 = (110)<sub>2</sub> <br />
+x - 1 = 5 = (101)<sub>2</sub> </p></code></pre></font></div><br>
+<p>It might not seem obvious with these examples, but binary representation of (x-1) can be obtained by simply flipping all the bits to the right of rightmost 1 in x and also including the rightmost 1.  </p>
+<p>Now think about x &amp; (x-1). x &amp; (x-1) will have all the bits equal to the x except for the rightmost 1 in x.<br />
+<div class="boxed"><font size="4"><pre><code>
+Let, x = 4 = (100)<sub>2</sub><br />
+x - 1 = 3 = (011)<sub>2</sub> <br />
+x &amp; (x-1) = 4 &amp; 3 = (100)<sub>2</sub>  &amp; (011)<sub>2</sub>  = (000)<sub>2</sub> <br />
+Let, x = 6 = (110)<sub>2</sub> <br />
+x - 1 = 5 = (101)<sub>2</sub> <br />
+x &amp; (x-1) = 6 &amp; 5 = (110)<sub>2</sub>  &amp; (101)<sub>2</sub>  = (100)<sub>2</sub> </p>
+</code></pre></font></div><br>
+<p>Properties for numbers which are powers of 2, is that they have one and only one bit set in their binary representation. If the number is neither zero nor a power of two, it will have 1 in more than one place. So if x is a power of 2 then x &amp; (x-1) will be 0.  </p>
+<h3>Implementation:</h3><br>
+
+<div class="boxed"><font size="4"><pre><code>  bool isPowerOfTwo(int x)
+    {
+        // x will check if x == 0 and !(x &amp; (x - 1)) will check if x is a power of 2 or not
+        return (x &amp;&amp; !(x &amp; (x - 1)));
+    }
+</code></pre></font></div><br><br>
+<h2>2) Count the number of ones in the binary representation of the given number.</h2>
+<p>The basic approach to evaluate the binary form of a number is to traverse on it and count the number of ones. But this approach takes log<sub>2</sub>N of time in every case.  </p>
+<p>Why log<sub>2</sub>N ?<br />
+As to get a number in its binary form, we have to divide it by 2, until it gets 0, which will take log<sub>2</sub>N of time.  </p>
+<p>With bitwise operations, we can use an algorithm whose running time depends on the number of ones present in the binary form of the given number. This algorithm is much better, as it will reach to logN, only in its worst case.</p>
+<div class="boxed"><font size="4"><pre><code>    int count_one (int n)
+        {
+            while( n )
+            {
+            n = n&amp;(n-1);
+               count++;
+            }
+            return count;
+    }
+</code></pre></font></div><br><br>
+<h3>Why this algorithm works ?</h3><br />
+As explained in the previous algorithm, the relationship between the bits of x and x-1. So as in x-1, the rightmost 1 and bits right to it are flipped, then by performing x&amp;(x-1), and storing it in x, will reduce x to a number containing number of ones(in its binary form) less than the previous state of x, thus increasing the value of count in each iteration.  </p>
+<h3>Example:</h3><br />
+<div class="boxed"><font size="4"><pre><code>
+n = 23 = {10111}<sub>2</sub> .<br />
+
+1. Initially, count = 0. <br />
+2.  Now, n will change to n&amp;(n-1). As n-1 = 22 = {10110}<sub>2</sub> , then n&amp;(n-1) will be {10111<sub>2</sub> &amp; {10110}<sub>2</sub>, which will be {10110}<sub>2</sub> which is equal<br> to 22. Therefore n will change to 22 and count to 1.<br />
+3.  As n-1 = 21 = {10101}<sub>2</sub> , then n&amp;(n-1) will be {10110}<sub>2</sub> &amp; {10101}<sub>2</sub>, which will be {10100}<sub>2</sub> which is equal to 20. Therefore n will change to 20 and count to 2.<br />
+4.  As n-1 = 19 = {10011}<sub>2</sub> , then n&amp;(n-1) will be {10100}<sub>2</sub> &amp; {10011}<sub>2</sub>, which will be {10000}<sub>2</sub> which is equal to 16.  Therefore n will change to 16 and count to 3.<br />
+5.  As n-1 = 15 = {01111}<sub>2</sub> , then n&amp;(n-1) will be {10000}<sub>2</sub> &amp; {01111}<sub>2</sub>, which will be {00000}<sub>2</sub> which is equal to 0. Therefore n will change to 0 and count to 4.<br />
+6.  As n = 0, the the loop will terminate and gives the result as 4.  
+</code></pre></font></div></p>
+<p><strong>Complexity:</strong>  O(K), where K is the number of ones present in the binary form of the given number.  </p>
+<h2>3)  <strong>Check if the i<sup>th</sup> bit is set in the binary form of the given number.</strong> </h3>
+<p>To check if the i<sup>th</sup> bit is set or not (1 or not), we can use AND operator. How?</p>
+<p>Let’s say we have a number N, and to check whether it’s i<sup>th</sup>  bit is set or not, we can AND it with the number 2<sup>i</sup> . The  binary form of 2<sup>i</sup> contains only i<sup>th</sup> bit as set (or 1), else every bit is 0 there. When we will AND it with N, and if the i<sup>th</sup> bit of N is set, then it will return a non zero  number (2<sup>i</sup> to be specific), else 0 will be returned.  </p>
+<p>Using Left shift operator, we can write 2<sup>i</sup> as 1 &lt;&lt; i . Therefore:  </p>
+<div class="boxed"><font size="4"><pre><code> bool check (int N)
+    {
+        if( N &amp; (1 &lt;&lt; i) )
+            return true;
+        else
+            return false;
+    }
+</code></pre></font></div>
+<p>Example:<br />
+Let’s say N = 20 = {10100}<sub>2</sub>. Now let’s check if it’s 2nd bit is set or not(starting from 0). For that, we have to AND it with 2<sup>2</sup>  = 1&lt;&lt;2 = {100}<sub>2</sub> . <br />
+{10100} &amp; {100} = {100} = 2<sup>2</sup> = 4(non-zero number), which means it’s 2nd bit is set.  </p>
+<h2>4) How to generate all the possible subsets of a set ?</h2>
+<p>A big advantage of bit manipulation is that it can help to iterate over all the subsets of an N-element set. As we all know there are 2<sup>N</sup> possible subsets of any given set with N elements. What if we represent each element in a subset with a bit. A bit can be either 0 or 1, thus we can use this to denote whether the corresponding element belongs to this given subset or not. So each bit pattern will represent a subset.  </p>
+<p>Consider a set A of 3 elements.<br />
+A = {a, b, c}  </p>
+<p>Now, we need 3 bits, one bit for each element. 1 represent that the corresponding element is present in the subset, whereas 0 represent the corresponding element is not in the subset. Let’s write all the possible combination of these 3 bits.  </p>
+<p>
+    <div class="boxed"><font size="4"><pre><code>  
+0 = (000)<sub>2</sub> = {}<br />
+1 = (001)<sub>2</sub> = {c}<br />
+2 = (010)<sub>2</sub> = {b}<br />
+3 = (011)<sub>2</sub> = {b, c}<br />
+4 = (100)<sub>2</sub> = {a}<br />
+5 = (101)<sub>2</sub> = {a, c}<br />
+6 = (110)<sub>2</sub> = {a, b}<br />
+7 = (111)<sub>2</sub> = {a, b, c}  </p>
+</code></pre></font></div><br><br>
+<h3>Pseudo Code:</h3><br>
+<div class="boxed"><font size="4"><pre><code>possibleSubsets(A, N):
+        for i = 0 to 2^N:
+            for j = 0 to N:
+                if jth bit is set in i:
+                    print A[j]
+            print ‘\n’
+</code></pre></font></div><br><br>
+<h3>Implementation:</h3><br>
+<div class="boxed"><font size="4"><pre><code>  void possibleSubsets(char A[], int N)
+    {
+        for(int i = 0;i &lt; (1 &lt;&lt; N); ++i)
+        {
+            for(int j = 0;j &lt; N;++j)
+                if(i &amp; (1 &lt;&lt; j))
+                    cout &lt;&lt; A[j] &lt;&lt; ‘ ‘;
+            cout &lt;&lt; endl;
+    }
+    }
+</code></pre></font></div><br><br>
+<nav><h3>5)  <strong>Find the largest power of 2 <a href="https://en.wikipedia.org/wiki/Most_significant_bit">(most significant bit</a>  in binary form), which is less than or equal to the given number N.</strong></h3><br>
+<p><strong>Idea:</strong> Change all the bits  which are at the right side of the most significant digit, to 1.  </p>
+<p><strong>Property:</strong> As we know that when all the bits of a number N are 1, then N must be equal to the 2<sup>i</sup> -1 , where i is the number of bits in N.    </p>
+<h3>Example:</h3><br>
+
+Let’s say binary form of a N is {1111}<sub>2</sub> which is equal to 15.<br />
+15 = 2<sup>4</sup>-1, where 4 is the number of bits in N.  </p>
+<p>This property can be used to find the largest power of 2 less than or equal to N. How? <br />
+If we somehow, change all the bits which are at right side of the most significant bit of N to 1, then the number will become x + (x-1) = 2 * x -1 , where x is the required answer.<br />
+Example: <br />
+ Let’s say N = 21 = {10101}, here most significant bit is the 4th one. (counting  from 0th digit)  and so the answer should be 16.<br />
+ So lets change all the right side bits of the most significant bit to 1. Now the number changes to <br />
+ {11111} = 31 = 2 * 16 -1 = Y (let’s say).<br />
+ Now the required answer is (Y+1)&gt;&gt;1 or (Y+1)/2.  </p>
+<p>Now the question arises here is how can we change all right side bits of most significant bit to 1?  </p>
+<p>Let’s take the N as  16 bit integer and binary form of N is {1000000000000000}.<br />
+Here we have to change all the right side bits to 1.  </p>
+<p>Initially we will copy that most significant bit to its adjacent right side by:  </p>
+<p>N = N | (N&gt;&gt;1).  </p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/3fb910b.jpg" /></p>
+<p>As you can see, in above diagram, after performing the operation, rightmost bit has been copied to its adjacent place.</p>
+<p>Now we will copy the 2 rightmost set bits to their adjacent right side.<br />
+N = N | (N&gt;&gt;2).<br />
+<img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/4682f09.jpg" /></p>
+<p>Now we will copy the 4 rightmost set bit to their adjacent right side.  </p>
+<p>N = N | (N&gt;&gt;4)<br />
+<img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/53261d4.jpg" /></p>
+<p>Now we will copy these 8 rightmost set bits to their adjacent right side.  </p>
+<p>N = N| (N&gt;&gt;8)<br />
+<img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/5f05f51.jpg" /></p>
+<p>Now all the right side bits of the most significant set bit has been changed to 1 .This is how we can change right side bits. This explanation is for 16 bit integer, and it can be extended for 32 or 64 bit integer too.  </p>
+<h2>Implementation:</h2><br>
+<div class="boxed"><font size="4"><pre><code>long largest_power(long N)
+    {
+        //changing all right side bits to 1.
+        N = N| (N&gt;&gt;1);
+        N = N| (N&gt;&gt;2);
+        N = N| (N&gt;&gt;4);
+        N = N| (N&gt;&gt;8);
+
+
+    //as now the number is 2 * x-1, where x is required answer, so adding 1 and dividing it by
+     2. 
+                return (N+1)&gt;&gt;1;
+
+    }
+</code></pre></font></div><br>
+<p><strong>Tricks with Bits:</strong> </p>
+<p>1) x ^ ( x &amp; (x-1)) : Returns the rightmost 1 in binary representation of x.  </p>
+<p>As explained above,  (x &amp; (x - 1)) will have all the bits equal to the x except for the rightmost 1 in x. So if we do bitwise XOR of x and (x &amp; (x-1)), it will simply return the rightmost 1. Let’s see an example.<br />
+        x = 10 = (1010)<sub>2</sub>      `
+    x &amp; (x-1) = (1010)<sub>2</sub>   &amp; (1001)<sub>2</sub>   = (1000)<sub>2</sub><br />
+    x ^ (x &amp; (x-1)) = (1010)<sub>2</sub>  ^ (1000)<sub>2</sub>   = (0010)<sub>2</sub> </p>
+<p>2) x &amp; (-x) : Returns the rightmost 1 in binary representation of x  </p>
+<p>(-x) is the two’s complement of x. (-x) will be equal to one’s complement of x plus 1. <br />
+Therefore (-x) will have all the bits flipped that are on the left of the rightmost 1 in x. So x &amp; (-x) will return rightmost 1.  </p>
+<p>x = 10 = (1010)<sub>2</sub><br />
+(-x) = -10 = (0110)<sub>2</sub><br />
+x &amp; (-x) = (1010)<sub>2</sub>   &amp; (0110)<sub>2</sub>   = (0010)<sub>2</sub> </p>
+<p>3) x | (1 &lt;&lt; n) : Returns the number x with the nth bit set.    </p>
+<p>(1 &lt;&lt; n) will return a number with only nth bit set. So if we OR it with x it will set the nth bit of x.<br />
+x = 10 = (1010)<sub>2</sub>
+n = 2<br />
+1 &lt;&lt; n = (0100)<sub>2</sub> <br />
+x | (1 &lt;&lt; n) = (1010)<sub>2</sub>   | (0100)<sub>2</sub>   = (1110)<sub>2</sub> </p>
+<h2>Applications of bit operations:</h2><br>
+<p>1) They are widely used in areas of graphics ,specially XOR(Exclusive OR) operations.<br />
+2) They are widely used in the embedded systems, in situations, where we need to set/clear/toggle just one single bit of a specific register without modifying the other contents. We can do OR/AND/XOR operations with the appropriate mask for the bit position.<br />
+3) Data structure like n-bit map can be used to allocate n-size resource pool to represent the current status.<br />
+4) Bits are used in networking, framing the packets of numerous bits which is sent to another system generally through any type of serial interface.  </p>
+<p>To see a creative use of Bitwise operators, you can refer <a href="http://snook.ca/archives/javascript/creative-use-bitwise-operators">this amazing article</a> , where the bit wise operations are smartly used while developing an online calendar for events.  </p>
+	</p>
+</div>
+</body>
+</html>

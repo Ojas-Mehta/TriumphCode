@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Binary Search</title>
+</head>
+<body>
+      <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+      <div class="center"><h1>Binary Search</h1><br></div>
+      <div class="boxing">
+        <h2>Introduction</h2>
+      <p>Binary search is the most popular Search algorithm.It is efficient and also one of the most commonly used techniques that is used to solve problems.
+
+        If all the names in the world <br>are written down together in order and you want to search for the position of a specific name, binary search will accomplish this in a maximum of 35 iterations.
+
+        Binary search works <br> only on a sorted set of elements. To use binary search on a collection, the collection must first be sorted.
+
+        When binary search is used to perform operations on a sorted set, the<br> number of iterations can always be reduced on the basis of the value that is being searched.<br>
+
+        Let us consider the following array:
+        <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/d90e6d2.png" /></p>
+      </p>
+      <p>By using linear search, the position of element 8 will be determined in the 9th iteration.
+
+      Let's see how the number of iterations can be reduced by using binary search. Before we start the search, we need to know the start and end of the range. Lets call them Low and High.</p>
+      <br>Low = 0
+      <br>High = n-1<br>
+      <br>Now, compare the search value K with the element located at the median of the lower and upper bounds. If the value K is greater, increase the lower bound, else decrease the upper<br> bound.
+      <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/0e5218d.png" /></p>
+
+      <p>Referring to the image above, the lower bound is 0 and the upper bound is 9. The median of the lower and upper bounds is (lower_bound + upper_bound) / 2 = 4. Here a[4] = 4. The <br>value 4>2, which is the value that you are searching for. Therefore, we do not need to conduct a search on any element beyond 4 as the elements beyond it will obviously be greater <br>than 2.
+
+      Therefore, we can always drop the upper bound of the array to the position of element 4. Now, we follow the same procedure on the same array with the following values:</p>
+      <br>Low:   0
+      <br>High:  3
+      <p>Repeat this procedure recursively until Low > High. If at any iteration, we get a[mid]=key, we return value of mid. This is the position of key in the array. If key is not present in the array, we return .<br>
+
+       <h3>Implementation:</h3></p>
+      <div class="boxed"><font size="4"><pre><code>
+
+      <pre>int binarySearch(int low,int high,int key)
+{
+   while(low&lt;=high)
+   {
+     int mid=(low+high)/2;
+     if(a[mid]&lt;key)
+     {
+         low=mid+1;
+     }
+     else if(a[mid]&gt;key)
+     {
+         high=mid-1;
+     }
+     else
+     {
+         return mid;
+     }
+   }
+   return -1;                //key not found
+ }
+</pre></code></pre></font>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Heap Sort</title>
+</head>
+<body>
+        <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+     <div class="center"><h1>Heap Sort </h1></div>
+     <div class="boxing">
+        <h2>Introduction</h2><br>
+     <p>Heaps can be used in sorting an array. In max-heaps, maximum element will always be at the root. Heap Sort uses this property of heap to sort the array.</p>
+     <p>Consider an array Arr which is to be sorted using Heap Sort.</p>
+     <ul><li>Initially build a max heap of elements in Arr.</li>
+     	<li>The root element, that is Arr[1], will contain maximum element of Arr. After that, swap this element with the last element of Arr and heapify the max heap excluding the last element which is already in its correct position and then decrease the length of heap by one.</li>
+     	<li>Repeat the step 2, until all the elements are in their correct position.</li>
+     </ul>
+     <h3>Implementation And Coding:</h3><br>
+    <div class="boxed"><font size="4"><pre><code> void heap_sort(int Arr[ ])<br>
+
+        {<br>
+        int heap_size = N;<br>
+
+        build_maxheap(Arr);<br>
+        for(int i = N; i >= 2 ; i-- )<br>
+        {<br>
+            swap|(Arr[ 1 ], Arr[ i ]);<br>
+            heap_size = heap_size - 1;<br>
+            max_heapify(Arr, 1, heap_size);<br>
+        }<br>
+        }
+     </code></pre></font></div><br><br>
+     <h3>Example:</h3>
+     <p>In the diagram below,initially there is an unsorted array Arr having 6 elements and then max-heap will be built.</p>
+     <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/c9fa843.png" /></p>
+     <p>After building max-heap, the elements in the array Arr will be:</p>
+     <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/dbe3d72.png" /></p>
+     <div class="boxed"><font size="4"><pre><code>Step 1: 8 is swapped with 5.<br>
+        Step 2: 8 is disconnected from heap as 8 is in correct position now and.<br>
+        Step 3: Max-heap is created and 7 is swapped with 3.<br>
+        Step 4: 7 is disconnected from heap.<br>
+        Step 5: Max heap is created and 5 is swapped with 1.<br>
+        Step 6: 5 is disconnected from heap.<br>
+        Step 7: Max heap is created and 4 is swapped with 3.<br>
+        Step 8: 4 is disconnected from heap.<br>
+        Step 9: Max heap is created and 3 is swapped with 1.<br>
+        Step 10: 3 is disconnected.</code></pre></font></div>
+        <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/e9d6f12.png" /></p>
+        <p>After all the steps, we will get a sorted array.</p>
+       <p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/e0a7b19.png" /></p>
+       </div>
+</body>
+</html>

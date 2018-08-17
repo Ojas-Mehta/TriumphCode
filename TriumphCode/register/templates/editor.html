@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Editor</title>
+    <style type="text/css" media="screen">
+       body {
+          font-family: "Comic Sans MS", cursive, sans-serif;
+          font-size:100%;
+          width:80%;
+          margin:auto;
+          background-color: #ebebe0;
+       }
+
+
+
+      #editor {
+         width: 80%;
+		 height: 180%;
+
+      }
+
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loader.css' %}">
+    <script src="{% static 'js/dashboard.js' %}" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+
+
+</head>
+
+<body>
+{% csrf_token %}
+
+<h1>Triumph Code</h1>
+<div class="navbar">
+  <a class="active" href="http://localhost:8000/dashboard/">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Solve Questions
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="http://localhost:8000/dashboard/problems/?level=easy" id="easyproblems">Easy</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=medium" id="mediumproblems">Medium</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=advanced" id="advancedproblems">Advanced</a>
+
+    </div>
+  </div>
+
+  <a href="http://localhost:8000/dashboard/Tutorials/">Tutorials</a>
+  <a href="http://localhost:8000/dashboard/Contest/">Contest</a>
+  <a href="http://localhost:8000/dashboard/CompileAndRun/">Compile & Run</a>
+  <a href="http://localhost:8000/dashboard/About">About</a>
+  <a href="http://localhost:8000/dashboard/profile">Profile</a>
+  <a href="http://localhost:8000/dashboard/status">Status</a>
+  <!--<div class="dropdown">-->
+    <!--<button class="dropbtn">Profile -->
+      <!--<i class="fa fa-caret-down"></i>-->
+    <!--</button>-->
+    <!--<div class="dropdown-content">-->
+      <!--<a href="#">View Profile</a>-->
+      <!--<a href="#">View Solved Questions</a>-->
+      <!--<a href="logout">Logout</a>-->
+    <!--</div>-->
+   <a href="logout">Logout</a>
+  </div>
+</div>
+
+
+<pre id="editor">
+#include &lt;stdio.h&gt;
+int main(){
+    //correct code for problem 1..sum of digits.
+    int test, num, sum;
+    scanf("%d", &test);
+    while(test--){
+        sum=0;
+       scanf("%d", &num);
+       while(num){
+           sum+=num%10;
+           num/=10;
+       }
+       printf("%d\n", sum);
+    }
+    return 0;
+}
+
+</pre>
+
+<script src="{% static 'js/editor/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/editor/edtr.js' %}" type="text/javascript" charset="utf-8"></script>
+
+
+
+<!--
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/chrome");
+    editor.session.setMode("ace/mode/javascript");
+</script>
+-->
+
+
+<select id="lang">
+  <option value="c">C</option>
+  <option value="cpp">C++</option>
+  <option value="java">JAVA</option>
+  <option value="python3">PYTHON</option>
+</select>
+<br>
+
+Enter input:<br><textarea rows="10" cols="60" id="inputdata" style="margin: 0px; width: 685px; height: 91px;"></textarea><br>
+<button id="getdata">Compile and Run</button>
+
+
+<div id="loader" style="display:none"></div>
+
+<div id="code_output_containter">
+    <p id="code_output"></p>
+    <p id="memory_used"></p>
+    <p id="time_used"></p>
+
+
+</div>
+
+</body>
+</html>

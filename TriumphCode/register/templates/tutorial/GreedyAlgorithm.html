@@ -1,0 +1,320 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Greedy Algorithm</title>
+</head>
+<body>    <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+	<div class="center"><h1>Greedy Algorithm : </h1></div>
+	<div class="boxing"><h2>Introduction</h2>
+<br>
+       In an algorithm design there is no one 'silver bullet' that is a cure for all computation problems. Different problems require the use of different kinds of techniques. A good programmer uses all these techniques based on the type of problem. Some commonly-used techniques are:</p>
+     <ol>
+     	<li>Divide and conquer</li>
+     	<li>Randomized algorithms</li>
+     	<li>Greedy algorithms (This is not an algorithm, it is a technique.)</li>
+     	<li>Dynamic programming</li>
+     </ol>
+     <h2>What is a 'Greedy algorithm'?</h2><br>
+     A greedy algorithm, as the name suggests, always makes the choice that seems to be the best at that moment. This means that it makes a locally-optimal choice in the hope that this choice will lead to a globally-optimal solution.<br>
+
+     How do you decide which choice is optimal?<br>
+
+     Assume that you have an objective function that needs to be optimized (either maximized or minimized) at a given point. A Greedy algorithm makes greedy choices at each step to ensure that the objective function is optimized. The Greedy algorithm has only one shot to compute the optimal solution so that it never goes back and reverses the decision.<br>
+
+     Greedy algorithms have some advantages and disadvantages:
+     <ol>
+     	<li>It is quite easy to come up with a greedy algorithm (or even multiple greedy algorithms) for a problem</li>
+     	<li><b>Analyzing the run time for greedy algorithms will generally be much easier</b> than for other techniques (like Divide and conquer). For the Divide and conquer technique, it is not clear whether the technique is fast or slow. This is because at each level of recursion the size of gets smaller and the number of sub-problems increases.</li>
+     	<li>The difficult part is that for greedy algorithms <b>you have to work much harder to understand correctness issues</b>. Even with the correct algorithm, it is hard to prove why it is correct. Proving that a greedy algorithm is correct is more of an art than a science. It involves a lot of creativity.</li>
+     </ol>
+     <p><b>Note:</b> Most greedy algorithms are not correct. An example is described later in this article.</p>
+     <h2> How to create a Greedy Algorithm?</h2>
+     <p>Being a very busy person, you have exactly T time to do some interesting things and you want to do maximum such things.<br>
+
+       You are given an array A of integers, where each element indicates the time a thing takes for completion. You want to calculate the maximum number of things that you can do in the limited time that you have.<br>
+
+       This is a simple Greedy-algorithm problem. In each iteration, you have to greedily select the things which will take the minimum amount of time to complete while maintaining two variables currentTime and numberOfThings. To complete the calculation, you must:</p>
+       <ol>
+       	   <li>Sort the array A in a non-decreasing order.</li>
+       	   <li>Select each to-do item one-by-one.</li>
+       	   <li>Add the time that it will take to complete that to-do item into currentTime.</li>
+       	   <li>Add one to numberOfThings.</li>
+       </ol>
+       <p>Repeat this as long as the currentTime is less than or equal to T.</p>
+       <p>Let A = {5, 3, 4, 2, 1} and T = 6</p>
+       <p>After sorting, A = {1, 2, 3, 4, 5}
+
+          <br>After the 1st iteration:
+          <ul>
+          	<li>
+          		currentTime = 1
+          	</li>
+          	<li>
+          		numberOfThings = 1
+          	</li>
+          </ul>
+      </p>
+      <p>After the 2nd iteration:</p>
+      <p><ul>
+      	<li>
+      		currentTime is 1 + 2 = 3
+      	</li>
+      	<li>numberOfThings = 2</li>
+
+      </ul></p>
+      <p>After the 3rd iteration:</p>
+      <p><ul>
+      	<li>currentTime is 3 + 3 = 6</li>
+      	<li>numberOfThings = 3</li>
+      </ul></p>
+      <p>After the 4th iteration, currentTime is 6 + 4 = 10, which is greater than T. Therefore, the answer is 3.</p>
+      <h2>Implementation : </h2><br>
+      <div class="boxed"><font size="4"><pre><code>
+      	#include <iostream><br>
+    #include <"algorithm"><br>
+
+    using namespace std;<br>
+    const int MAX = 105;<br>
+    int A[MAX];<br>
+
+    int main()<br>
+    {<br>
+        int T, N, numberOfThings = 0, currentTime = 0;<br>
+        cin >> N >> T;<br>
+        for(int i = 0;i < N;++i)<br>
+            cin >> A[i];<br>
+        sort(A, A + N);<br>
+        for(int i = 0;i < N;++i)<br>
+        {<br>
+            currentTime += A[i];<br>
+            if(currentTime > T)<br>
+                break;<br>
+            numberOfThings++;<br>
+        }<br>
+        cout << numberOfThings << endl;<br>
+        return 0;<br>
+    }<br>
+      </code></pre></font></div>
+      <p>This example is very trivial and as soon as you read the problem, it is apparent that you can apply the Greedy algorithm to it.
+
+        <br>Consider a more difficult problem-the Scheduling problem.<br>
+
+        You have the following:</p>
+        <ul><li>List of all the tasks that you need to complete today</li>
+        <li>Time that is required to complete each task</li>
+        <li>Priority (or weight ) to each work.</li>
+        </ul>
+
+       <p>You need to determine in what order you should complete the tasks to get the most optimum result.<br>
+
+To solve this problem you need to analyze your inputs. In this problem, your inputs are as follows:</p>
+       <p><ul>
+       	<li>
+       		Integer N for the number of jobs you want to complete
+       	</li>
+       	<li>Lists P: Priority (or weight)</li>
+       	<li>List T: Time that is required to complete a task</li>
+       </ul></p>
+       <p>To understand what criteria to optimize, you must determine the total time that is required to complete each task.<br>
+
+C(j) = T[1] + T[2] + .... + T[j] where 1 <= j <= N<br>
+
+This is because jth work has to wait till the first (j-1) tasks are completed after which it requires T[j] time for completion.<br>
+
+For example, if T = {1, 2, 3}, the completion time will be:</p>
+     <ul>
+     	<li>
+     		C(1) = T[1] = 1
+     	</li>
+     	<li>
+     		C(1) = T[1] = 1
+     	</li>
+     	<li>
+     		C(3) = T[1] + T[2] + T[3] = 1 + 2 + 3 = 6
+     	</li>
+     </ul>
+   <p>You obviously want completion times to be as short as possible. But it's not that simple.<br>
+
+In a given sequence, the jobs that are queued up at the beginning have a shorter completion time and jobs that are queued up towards the end have longer completion times.M<br>
+
+What is the optimal way to complete the tasks?<br>
+
+This depends on your objective function. While there are many objective functions in the "Scheduling" problem, your objective function F is the weighted sum of the completion times.</p>
+         <p><strong>F = P[1] * C(1) + P[2] * C(2) + ...... + P[N] * C(N)</strong>
+
+This objective function must be minimized.</p>
+        <p>
+        	<en><b>Special cases</b></en><br>
+
+Consider the special cases that is reasonably intuitive about what the optimal thing to do is. Looking at these special cases will bring forth a couple of natural greedy algorithms after which you will have to figure out how to narrow these down to just one candidate, which you will prove to be correct.<br>
+
+The two special cases are as follows:<br>
+
+If the time required to complete different tasks is the same i.e. T[i] = T[j] where 1 <= i, j <= N, but they have different priorities then in what order will it make sense to schedule the jobs?<br>
+
+If the priorities of different tasks are the same i.e. P[i] = P[j] where 1 <= i, j <= N but they have different lengths then in what order do you think we must schedule the jobs?<br>
+
+If the time required to complete different tasks is the same, then you should give preference to the task with the higher priority.
+        </p>
+         <p><b>Case 1</b></p>
+         <p>Consider the objective function that you need to minimize. Assume that the time required to complete the different tasks is t.<br>
+
+T[i] = t where 1 <= i <= N<br>
+
+Irrespective of what sequence is used, the completion time for each task will be as follows:<br>
+C(1) = T[1] = t<br>
+C(2) = T[1] + T[2] = 2 * t<br>
+C(3) = T[1] + T[2] + T[3] = 3 * t<br>
+...<br>
+C(N) = N * t<br>
+
+To make the objective function as small as possible the highest priority must be associated with the shortest completion time.</p>
+           <p><b>Case 2</b></p>
+           <p>In the second case, if the priorities of different tasks are the same, then you must favor the task that requires the least amount of time to complete. Assume that the priorities of the different tasks is p.<br>
+
+F = P[1] * C(1) + P[2] * C(2) + ...... + P[N] * C(N)<br>
+F = p * C(1) + p * C(2) + ...... + p * C(N)<br>
+F = p * (C(1) + C(2) + ...... + C(N))<br>
+
+To minimize the value of F, you must minimize (C(1) + C(2) + ...... + C(N)), which can be done if you start working on the tasks that require the shortest time to complete.<br>
+
+There are two rules. Give preference to tasks that:</p>
+                 <p><ul><li>Have a higher priority</li>
+                 	<li>Take less time to complete</li>
+
+                 </ul></p>
+                 <p>The next step is to move beyond the special cases, to the general case. In this case, the priorities and the time required for each task are different.<br>
+
+If you have 2 tasks and both these rules give you the same advice, then the task that has a higher priority and takes less time to complete is clearly the task that must be completed first. But what if both these rules give you conflicting advice? What if you have a pair of tasks where one of them has a higher priority and the other one requires a longer time to complete? ( i.e. P[i] > P[j] but T[i] > T[j] ). Which one should you complete first?<br>
+
+Can you aggregate these 2 parameters (time and priority) into a single score such that if you sort the jobs from higher score to lower score you will always get an optimal solution?<br>
+
+Remember the 2 rules.</p>
+                  <p><ol>
+                  	     <li>Give preference to higher priorities so that the higher priorities lead to a higher score.</li>
+                  	     <li>Give preference to tasks that require less time to complete so that the more time that is required should decrease the score.</li>
+                  </ol></p>
+                  <p>You can use a simple mathematical function, which takes 2 numbers (priority and time required) as the input and returns a single number (score) as output while meeting these two properties. (There are infinite number of such functions.)<br>
+
+Lets take two of the simplest functions that have these properties</p> 
+                    <p>
+                    	<ul>
+                    		<li><b>Algorithm #1:</b> order the jobs by decreasing value of ( P[i] - T[i] )</li>
+                    	</ul>
+                    	<ul>
+                    		<li><b>Algorithm #2:</b> order the jobs by decreasing value of ( P[i] / T[i] )</li>
+                    	</ul>
+                    </p>
+                    <p>
+                    	For simplicity we are assuming that there are no ties.<br>
+
+Now you have two algorithms and at least one of them is wrong. Rule out the algorithm that does not do the right thing.<br>
+
+T = {5, 2} and P = {3, 1}<br>
+
+According to the algorithm #1 ( P[1] - T[1] ) < ( P[2] - T[2] ), therefore, the second task should be completed first and your objective function will be:<br>
+
+F = P[1] * C(1) + P[2] * C(2) = 1 * 2 + 3 * 7 = 23<br>
+
+According to algorithm #2 ( P[1] / T[1] ) > ( P[2] / T[2] ), therefore, the first task should be completed first and your objective function will be:<br>
+
+F = P[1] * C(1) + P[2] * C(2) = 3 * 5 + 1 * 7 = 22<br>
+
+Algorithm #1 will not give you the optimal answer and, therefore, algorithm #1 is not (always ) correct.<br>
+
+Note: Remember that Greedy algorithms are often WRONG. Just because algorithm #1 is not correct, it does not imply that algorithm #2 is guaranteed to be correct. It does, however, turn out that in this case algorithm #2 is always correct.<br>
+
+Therefore, the final algorithm that returns the optimal value of the objective function is:<br>
+                    </p>
+                     <p>
+                     <div class="boxed"><font size="4"><pre><code>Algorithm (P, T, N)<br>
+    {<br>
+        let S be an array of pairs ( C++ STL pair ) to store the scores and their indices<br>
+        , C be the completion times and F be the objective function<br>
+        for i from 1 to N:<br>
+            S[i] = ( P[i] / T[i], i )            // Algorithm #2<br>
+        sort(S)<br>
+        C = 0<br>
+        F = 0<br>
+        for i from 1 to N:                // Greedily choose the best choice<br>
+            C = C + T[S[i].second]<br>
+            F = F + P[S[i].second]*C<br>
+        return F<br>
+    }</code></pre></font></div>
+                     </p> 
+                     <p>
+                     	Time complexity You have 2 loops taking O(N) time each and one sorting function taking O(N * logN). Therefore, the overall time complexity is O(2 * N + N * logN) = O(N * logN).
+                     </p>
+                     <p>
+                     	<h2>Proof of Correctness</h2>
+                     	<br>To prove that algorithm #2 is correct, use proof by contradiction. Assume that what you are trying to prove is false and from that derive something that is obviously false.<br>
+
+Therefore, assume that this greedy algorithm does not output an optimal solution and there is another solution (not output by greedy algorithm) that is better than greedy algorithm.<br>
+
+A = Greedy schedule (which is not an optimal schedule)<br>
+B = Optimal Schedule (best schedule that you can make)<br>
+
+Assumption #1: all the ( P[i] / T[i] ) are different.
+Assumption #2: (just for simplicity, will not affect the generality) ( P[1] / T[1] ) > ( P[2] / T[2] ) > .... > ( P[N] / T[N] )<br>
+
+Because of assumption #2, the greedy schedule will be A = ( 1, 2, 3, ....., N ). Since A is not optimal (as we considered above) and A is not equal to B (because B is optimal), you can claim that B must contain two consecutive jobs ( i, j ) such that the earlier of those 2 consecutive jobs has a larger index ( i > j ). This is true because the only schedule that has the property, in which the indices only go up, is A = ( 1, 2, 3, ...., N ).<br>
+
+Therefore, B = ( 1, 2, ..., i, j, ... , N ) where i > j.<br>
+
+You also have to think about what is the profit or loss impact if you swap these 2 jobs. Think about the effect of this swap on the completion times of the following:<br>
+                         <p>
+                         	<ol>
+                         		<li>Work on k other than i and j</li>
+                         		<li>Work on i</li>
+                         		<li>Work on j</li>
+
+                         	</ol>
+                         </p>
+                     </p>
+                     <p>For k, there will be 2 cases:
+
+When k is on the left of i and j in B If you swap i and j, then there will be no effect on the completion time of k.<br>
+
+When k is on the right of i and j in B After swapping, the completion time of k is C(k) = T[1] + T[2] + .. + T[j] + T[i] + .. T[k], k will remain same.<br>
+
+For i the completion time: Before swapping was C(i) = T[1] + T[2] + ... + T[i] After swapping is C(i) = T[1] + T[2] + ... + T[j] + T[i]<br>
+
+Clearly, the completion time for i goes up by T[j] and the completion time for j goes down by T[i].<br>
+
+Loss due to the swap is (P[i] * T[j])<br>
+Profit due to the swap is (P[j] * T[i])<br>
+
+Using assumption #2, i > j implies that ( P[i] / T[i] ) < ( P[j] / T[j] ). Therefore ( P[i] * T[j] ) < ( P[j] * T[i] ) which means Loss < Profit. This means that swap improves B but it is a contradiction as we assumed that B is the optimal schedule. This completes our proof.</p>
+                            <h2>Where to use Greedy algorithms?</h2><br>
+                            	A problem must comprise these two components for a greedy algorithm to work:<br>
+                            	<ol>
+                            		<li>It has optimal substructures. The optimal solution for the problem contains optimal solutions to the sub-problems.</li>
+                            		<li>It has a greedy property (hard to prove its correctness!). If you make a choice that seems the best at the moment and solve the remaining sub-problems later, you still reach an optimal solution. You will never have to reconsider your earlier choices.</li>
+                            	</ol>
+                            	<p>For example:</p>
+                            	<p>
+                            	<ol>
+                            		<li>Activity Selection problem</li>
+                            		<li>Fractional Knapsack problem</li>
+                            		<li>Scheduling problem</li>
+                            	</ol>
+                            </p>
+        <h2>Examples</h2>
+        <p>The greedy method is quite powerful and works well for a wide range of problems. Many algorithms can be viewed as applications of the Greedy algorithms, such as (includes but is not limited to):</p>
+        <p>
+        	<ul>
+        		<li>
+        			Minimum Spanning Tree
+        		</li>
+        		<li>
+        			Dijkstra’s algorithm for shortest paths from a single source
+        		</li>
+        		<li>
+        			Huffman codes ( data-compression codes )
+        		</li>
+        	</ul>
+        </p>
+</div>
+</body>
+</html>

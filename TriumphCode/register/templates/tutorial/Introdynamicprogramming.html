@@ -1,0 +1,202 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction : </title>
+</head>
+<body>
+      <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+       <div class="center-"><h1>Introduction to Dynamic Programming  </h1></div>
+       <div class="boxing">
+       <h2>Introduction</h2><br>
+       	<p><img alt="Yes, this is DP for you!" src="https://he-s3.s3.amazonaws.com/media/uploads/6b68f98.png" /></p>
+<p>The image above says a lot about Dynamic Programming. So, is repeating the things for which you already have the answer, a good thing ? A programmer would disagree. That's what Dynamic Programming is about. To <em>always</em> remember answers to the sub-problems you've already solved.</p>
+<p>Let us say that we have a machine, and to determine its state at time <strong>t</strong>, we have certain quantities called state <strong>variables.</strong> There will be certain times when we have to make a decision which affects the state of the system, which may or may not be known to us in advance. These decisions or changes are equivalent to transformations of state variables. The results of the previous decisions help us in choosing the future ones. </p>
+<p>What do we conclude from this? We need to break up a problem into a series of overlapping sub-problems, and build up solutions to larger and larger sub-problems. If you are given a problem, which can be broken down into smaller sub-problems, and these smaller sub-problems can still be broken into smaller ones - and if you manage to find out that there are some over-lappping sub-problems, then you've encountered a DP problem.</p>
+<h3>Some famous Dynamic Programming algorithms are: </h3><br>
+<nav><ul>
+<li><a href="https://en.wikipedia.org/wiki/Diff_utility">Unix diff</a> for comparing two files</li>
+<li><a href="https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm">Bellman-Ford</a> for shortest path routing in networks</li>
+<li><a href="http://en.wikipedia.org/wiki/TeX">TeX</a> the ancestor of LaTeX</li>
+<li><a href="https://en.wikipedia.org/wiki/WASP_%28cricket_calculation_tool%29">WASP</a> - Winning and Score Predictor</li>
+</ul></nav>
+<p>The core idea of Dynamic Programming is to avoid repeated work by remembering partial results and this concept finds it application in a lot of real life situations.</p>
+<p>In programming, Dynamic Programming is a powerful technique that allows one
+to solve different types of problems in time O(n<sup>2</sup>) or O(n<sup>3</sup>) for which a naive approach would take exponential time.</p>
+<p><a href="http://www.quora.com/Jonathan-Paulson">Jonathan Paulson</a> explains Dynamic Programming in his amazing Quora answer <a href="http://www.quora.com/How-should-I-explain-dynamic-programming-to-a-4-year-old/answer/Jonathan-Paulson">here.</a> </p>
+<blockquote>
+<p>Writes down "1+1+1+1+1+1+1+1 =" on a sheet of paper. <br />
+"What's that equal to?"<br />
+Counting "Eight!"<br />
+<strong>Writes down another "1+" on the left. <br />
+"What about that?"</strong><br />
+"Nine!" "
+How'd you know it was nine so fast?"<br />
+ "You just added one more!" <br />
+"So you didn't need to recount because you remembered  there were eight! 
+Dynamic Programming is just a fancy way to say remembering stuff to save time later!"  </p>
+</blockquote>
+<hr />
+<h3>Dynamic Programming and Recursion:</h3>
+<p>Dynamic programming is basically, recursion plus using common sense. What it means is that recursion allows you to express the value of a function in terms of other values of that function. Where the common sense tells you that if you implement your function in a way that the recursive calls are done in advance, and stored for easy access, it will make your program faster. This is what we call Memoization - it is memorizing the results of some specific states, which can then be later accessed to solve other sub-problems.</p>
+<p><strong>The intuition behind dynamic programming is that we trade space for time</strong>, i.e. to say that instead of calculating all the states taking a lot of time but no space, we take up space to store the results of all the sub-problems to save time later.</p>
+<p>Let's try to understand this by taking an example of Fibonacci numbers.</p>
+<blockquote>
+<p>Fibonacci (n) = 1; if n = 0<br />
+ Fibonacci (n) = 1; if n = 1<br />
+Fibonacci (n)  = Fibonacci(n-1) + Fibonacci(n-2)  </p>
+</blockquote>
+<p>So, the first few numbers in this series will be: <strong>1, 1, 2, 3, 5, 8, 13, 21...</strong> and so on!</p>
+<p>A code for it using pure recursion:</p>
+<div class="boxed"><font size="4"><pre><code>  int fib (int n) {
+        if (n &lt; 2)
+            return 1;
+        return fib(n-1) + fib(n-2);
+    }
+</code></pre></font></div><br><br>
+<h3>Using Dynamic Programming approach with memoization:</h3><br>
+<div class="boxed"><pre><code><font size="4"> void fib () {
+        fibresult[0] = 1;
+        fibresult[1] = 1;
+        for (int i = 2; i&lt;n; i++)
+           fibresult[i] = fibresult[i-1] + fibresult[i-2];
+    }
+</font></code></pre></div><br>
+<p>Are we using a different recurrence relation in the two codes? No.
+Are we doing anything different in the two codes? Yes. </p>
+<p>In the recursive code, a lot of values are being recalculated multiple times. We could do good with calculating each unique quantity only once. Take a look at the image to understand that how certain values were being recalculated in the recursive way:<br />
+<img alt="enter image description here" src="http://ugweb.cs.ualberta.ca/~c274/web/ConcreteComputing/image/fib_tree.png" /></p>
+<hr />
+<h3>Majority of the Dynamic Programming problems can be categorized into two types:</h3>
+<p><strong>1. Optimization problems.<br />
+ 2. Combinatorial problems.</strong></p>
+<p>The optimization problems expect you to select a feasible solution, so that the value of the required function is minimized or maximized. Combinatorial problems expect you to figure out the number of ways to do something, or the probability of some event happening.</p>
+<p><b>Every Dynamic Programming problem has a schema to be followed: </b> </p>
+<ul>
+<li>Show that the problem can be broken down into optimal sub-problems.</li>
+<li>Recursively define the value of the solution by expressing it in terms of optimal solutions for smaller sub-problems.</li>
+<li>Compute the value of the optimal solution in bottom-up fashion.</li>
+<li>Construct an optimal solution from the computed information.</li>
+</ul>
+<p><strong>Bottom up vs. Top Down:</strong> </p>
+<ul>
+<li><strong>Bottom Up</strong> - I'm going to learn programming. Then, I will start practicing. Then, I will start taking part in contests. Then, I'll practice even more and try to improve. After working hard like crazy, I'll be an amazing coder.</li>
+<li><strong>Top Down</strong> - I will be an amazing coder. How? I will work hard like crazy.  How? I'll practice more and try to improve. How? I'll start taking part in contests. Then? I'll practicing. How? I'm going to learn programming. </li>
+</ul>
+<p>Not a great example, but I hope I got my point across.  In Top Down, you start building the big solution right away by explaining how you build it from smaller solutions. In Bottom Up, you start with the small solutions and then build up.</p>
+<p>Memoization is very easy to code and might be your first line of approach for a while. Though, with dynamic programming, you don't risk blowing stack space, you end up with lots of liberty of when you can throw calculations away. The downside is that you have to come up with an ordering of a solution which works. </p>
+<p><strong>One can think of dynamic programming as a table-filling algorithm: you know the calculations you have to do, so you pick the best order to do them in and ignore the ones you don't have to fill in.</strong></p>
+<hr />
+<h3>Let's look at a sample problem:</h3>
+<blockquote>
+<p>Let us say that you are given a number <strong>N,</strong> you've to find the
+number of different ways to write it as the sum of 1, 3 and 4.</p>
+</blockquote>
+<p>For example, if N = 5, the answer would be 6.</p>
+<div class="boxed"><pre><code><font size="4"> 
+<ul>
+<li>1 + 1 + 1 + 1 + 1</li>
+<li>1 + 4</li>
+<li>4 + 1</li>
+<li>1 + 1 + 3</li>
+<li>1 + 3 + 1</li>
+<li>3 + 1 + 1</li>
+</ul>
+</font></code></pre></div>
+<p><strong>Sub-problem:</strong>  DP<sub>n</sub> be the number of ways to write <strong>N</strong> as the sum of 1, 3, and 4.<br />
+<strong>Finding recurrence:</strong> Consider one possible solution, n = x1 + x2 + ... x<sub>n</sub>.  If the last number is 1, the sum of the remaining numbers should be n - 1. So, number of sums that end with 1 is equal to DP<sub>n-1.</sub>. Take other cases into account where the last number is 3 and 4. The final recurrence would be: </p>
+<blockquote>
+<p>DP<sub>n</sub> = DP<sub>n-1</sub> + DP<sub>n-3</sub> + DP<sub>n-4.</sub></p>
+</blockquote>
+<p>Take care of the base cases.  DP<sub>0</sub> = DP<sub>1</sub> = DP<sub>2</sub> = 1, and DP<sub>3</sub> = 2.  </p>
+<h2>Implementation:</h2><br>
+<div class="boxed"><pre><code><font size="4">  DP[0] = DP[1] = DP[2] = 1; DP[3] = 2;
+    for (i = 4; i &lt;= n; i++) {
+      DP[i] = DP[i-1] + DP[i-3] + DP[i-4];
+    }
+</font></code></pre></div>
+<p>The technique above, takes a bottom up approach and uses memoization to not compute results that have already been computed.</p>
+<hr />
+<p>I also want to share <a href="http://www.quora.com/Michal-Danil%C3%A1k">Michal's</a> amazing <a href="http://www.quora.com/Are-there-any-good-resources-or-tutorials-for-dynamic-programming-besides-the-TopCoder-tutorial/answer/Michal-Danil%C3%A1k?srid=3OBi&amp;share=1">answer on Dynamic Programming from Quora.</a></p>
+<blockquote>
+<p>"Imagine you have a collection of <strong>N</strong> wines placed next to each
+other on a shelf. For simplicity, let's number the wines from left to
+right as they are standing on the shelf with integers from <strong>1 to N</strong>,
+respectively. The price of the i<sup>th</sup> wine is pi. (prices of
+different wines can be different).</p>
+<p>Because the wines get better every year, supposing today is the year
+1, on year y the price of the i<sup>th</sup> wine will be y*pi, i.e.
+y-times the value that current year.</p>
+<p>You want to sell all the wines you have, but you want to sell exactly
+one wine per year, starting on this year. One more constraint - on
+each year you are allowed to sell only either the leftmost or the
+rightmost wine on the shelf and you are not allowed to reorder the
+wines on the shelf (i.e. they must stay in the same order as they are
+in the beginning).</p>
+<p>You want to find out, what is the maximum profit you can get, if you
+sell the wines in optimal order?"</p>
+</blockquote>
+<p>So, for example, if the prices of the wines are (in the order as they are placed on the shelf, from left to right): p1=1, p2=4, p3=2, p4=3. The optimal solution would be to sell the wines in the order <strong>p1, p4, p3, p2</strong> for a total profit 1 * 1 + 3 * 2 + 2 * 3 + 4 * 4 = 29.</p>
+<h3>Wrong solution!</h3>
+<p>After playing with the problem for a while, you'll probably get the feeling, that in the optimal solution you want to sell the expensive wines as late as possible. You can probably come up with the following greedy strategy:</p>
+<blockquote>
+<p>Every year, sell the cheaper of the two (leftmost and rightmost)
+available wines.</p>
+</blockquote>
+<p>Although the strategy doesn't mention what to do when the two wines cost the same, this strategy feels right. But unfortunately, it isn't, as the following example demonstrates. </p>
+<p>If the prices of the wines are: p1=2, p2=3, p3=5, p4=1, p5=4. The greedy strategy would sell them in the order p1, p2, p5, p4, p3 for a total profit 2 * 1 + 3 * 2 + 4 * 3 + 1 * 4 + 5 * 5 = 49.</p>
+<p>But, we can do better if we sell the wines in the order <strong>p1, p5, p4, p2, p3</strong> for a total profit 2 * 1 + 4 * 2 + 1 * 3 + 3 * 4 + 5 * 5 = 50. </p>
+<p>This counter-example should convince you, that the problem is not so easy as it can look on a first sight and  it can be solved using DP.</p>
+<h3>How? Write a backtrack.</h3>
+<p>When coming up with the memoization solution for a problem, start with a backtrack solution that finds the correct answer. Backtrack solution enumerates all the valid answers for the problem and chooses the best one. </p>
+<p>Here are some restrictions on the backtrack solution:</p>
+<ul>
+<li>It should be a function, calculating the answer using recursion.</li>
+<li>It should return the answer with return statement, i.e., not store it somewhere.</li>
+<li>All the non-local variables that the function uses should be used as read-only, i.e. the function can modify only local variables and its arguments.</li>
+</ul>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/f81150c.png" /></p>
+<p>This solution simply tries all the possible valid orders of selling the wines. If there are <strong>N</strong> wines in the beginning, it will try <strong>2<sup>N</sup></strong> possibilities (each year we have 2 choices). So even though now we get the correct answer, the time complexity of the algorithm grows exponentially.</p>
+<p>The correctly written backtrack function should always represent an answer to a well-stated question. In our case profit function represents an answer to a question: "<em>What is the best profit we can get from selling the wines with prices stored in the array p, when the current year is year and the interval of unsold wines spans through [be, en], inclusive?</em>"</p>
+<p>You should always try to create such a question for your backtrack function to see if you got it right and understand exactly what it does.</p>
+<p>We should try to minimize the state space of function arguments. In this step think about, which of the arguments you pass to the function are redundant. Either we can construct them from the other arguments or we don't need them at all. If there are any such arguments, don't pass them to the function. Just calculate them inside the function.</p>
+<p>In the above function profit, the argument year is redundant. It is equivalent to the number of wines we have already sold plus one, which is equivalent to the total number of wines from the beginning minus the number of wines we have not sold plus one. If we create a read-only <strong>global variable N,</strong> representing the total number of wines in the beginning, we can rewrite our function as follows:</p>
+<div class="boxed"><pre><code><font size="4">  int N; // read-only number of wines in the beginning
+    int p[N]; // read-only array of wine prices
+
+        int profit(int be, int en) {
+          if (be &gt; en)
+            return 0;
+          // (en-be+1) is the number of unsold wines
+          int year = N - (en-be+1) + 1; // as in the description above
+           return max(
+            profit(be+1, en) + year * p[be],
+            profit(be, en-1) + year * p[en]);
+        }
+</font></code></pre></div><br>
+<p>We are now 99% done. To transform the backtrack function with time complexity O(2<sup>N</sup>) into the memoization solution with time complexity O(N<sup>2</sup>), we will use a little trick which doesn't require almost any thinking. As noted above, there are only O(N<sup>2</sup>) different arguments our function can be called with. In other words, there are only O(N<sup>2</sup>) different things we can actually compute. </p>
+<p>So where does O(2<sup>N</sup>) time complexity comes from and what does it compute? The answer is - the exponential time complexity comes from the repeated recursion and because of that, it computes the same values again and again. If you run the above code for an arbitrary array of N=20 wines and calculate how many times was the function called for arguments be=10 and en=10 you will get a number 92378. </p>
+<p>That's a huge waste of time to compute the same answer that many times. What we can do to improve this is to memoize the values once we have computed them and every time the function asks for an already memoized value, we don't need to run the whole recursion again. </p>
+<div class="boxed"><pre><code><font size="4"> int N; // read-only number of wines in the beginning
+    int p[N]; // read-only array of wine prices
+    int cache[N][N]; // all values initialized to -1 (or anything you choose)
+
+        int profit(int be, int en) {
+          if (be &gt; en)
+            return 0;
+         // these two lines save the day
+          if (cache[be][en] != -1)
+            return cache[be][en];
+          int year = N - (en-be+1) + 1;
+          // when calculating the new answer, don't forget to cache it
+          return cache[be][en] = max(
+            profit(be+1, en) + year * p[be],
+            profit(be, en-1) + year * p[en]);
+        }
+</font></code></pre></div>
+<p>To sum it up, if you identify that a problem can be solved using DP, try to create a backtrack function that calculates the correct answer. Try to avoid the redundant arguments, minimize the range of possible values of function arguments and also try to optimize the time complexity of one function call (remember, you can treat recursive calls as they would run in O(1) time). Finally, you can memoize the values and don't calculate the same things twice.</p>
+<hr />
+<p>Read Michal's another cool answer on Dynamic Programming <a href="http://www.quora.com/How-do-I-figure-out-how-to-iterate-over-the-parameters-and-write-bottom-up-solutions-to-dynamic-programming-related-problems/answer/Michal-Danil%C3%A1k?srid=3OBi&amp;share=1">here.</a> </p>
+</div>
+</body>
+</html>

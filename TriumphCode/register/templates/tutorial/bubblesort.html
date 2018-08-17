@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!doctype html>
+
+    <html>
+          <head>
+              <title>BubbleSort</title>
+          </head>
+          
+          <body>
+            <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css"/>
+                <div class="center"><h1>BUBBLE SORT</h1> </div><br>
+
+                <nav class="boxing">
+                    <h2>Introduction</h2>
+                    <p>Bubble sort is based on the idea of repeatedly comparing pairs of adjacent elements and then swapping their positions if they exist in the wrong order.</p>
+                <h2 margin = 3px;>CODE : </h2><br>
+                <div class="boxed">
+                    
+                <pre><font size="4"><em>void bubble_sort( int A[ ], int n )
+ {
+    int temp;
+    
+    for(int k = 0; k&lt; n-1; k++) 
+     {
+        // (n-k-1) is for ignoring comparisons of elements which have already been compared in earlier iterations
+
+        for(int i = 0; i &lt; n-k-1; i++)
+         {
+            if(A[ i ] &gt; A[ i+1] ) 
+            {
+                // here swapping of positions is being done.
+                temp = A[ i ];
+                A[ i ] = A[ i+1 ];
+                A[ i + 1] = temp;
+            }
+        }
+    }
+}
+</pre></div></font></em><br><br>
+                 <h3>Step-by-step example</h3>
+                 <p>Let us take the array of numbers "5 1 4 2 8", and sort the array from lowest number to greatest number using bubble sort. In each step, elements written in bold are being compared.<br> Three passes will be required.</p>
+                 <div class="boxed">
+                 <b><font size="4"><h4>First Pass</h4></font></b>
+                 <p> ( <strong>5 1</strong> 4 2 8 ) -- ( <strong>1 5</strong> 4 2 8 ), Here, algorithm compares the first two elements, and swaps since 5 > 1.
+                     <br>( 1 <strong>5 4</strong> 2 8 ) --  ( 1 <strong>4 5</strong> 2 8 ), Swap since 5 > 4
+                     <br>( 1 4 <strong>5 2</strong> 8 ) --  ( 1 4 <strong>2 5</strong> 8 ), Swap since 5 > 2
+                     <br>( 1 4 2 <strong>5 8</strong> ) --  ( 1 4 2 <strong>5 8</strong> ), Now, since these elements are already in order (8 > 5), algorithm does not swap them.</p>        
+                 </p>   
+                 <b><font size="4"><h4>Second Pass</h4></font></b>
+                 <p> 
+                    <br>( <strong>1 4</strong> 2 5 8 ) --  ( <strong>1 4</strong> 2 5 8 )
+                    <br>( 1 <strong>4 2</strong> 5 8 ) --  ( 1 <strong>2 4</strong> 5 8 ), Swap since 4 > 2
+                    <br>( 1 2 <strong>4 5</strong> 8 ) --  ( 1 2 <strong>4 5</strong> 8 )
+                    <br>( 1 2 4 <strong>5 8</strong> ) --  ( 1 2 4 <strong>5 8</strong> )
+                    <br>Now, the array is already sorted, but the algorithm does not know if it is completed. The algorithm needs one whole pass without any swap to know it is sorted. 
+                 </p>
+                 <b><font size="4"><h4>Third Pass</h4></font></b>
+                 <p>
+                    <br>( <strong>1 2</strong> 4 5 8 ) --  ( <strong>1 2</strong> 4 5 8 )
+                    <br>( 1 <strong>2 4</strong> 5 8 ) --  ( 1 <strong>2 4</strong> 5 8 )
+                    <br>( 1 2 <strong>4 5</strong> 8 ) --  ( 1 2 <strong>4 5</strong> 8 ) 
+                    <br>( 1 2 4 <strong>5 8</strong> ) --  ( 1 2 4 <strong>5 8</strong> ) 
+                 </p></nav> 
+             </div>
+                </body>
+      </html>

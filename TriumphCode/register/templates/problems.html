@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problems</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loader.css' %}">
+
+ <style>
+
+html{
+    height:auto;
+}
+
+  body {
+       font-family: "Comic Sans MS", cursive, sans-serif;
+       font-size:100%;
+       width:80%;
+       margin:auto;
+       background-color: #ebebe0;
+  }
+table {
+    border: 1px;
+    border-radius: 5px;
+border-collapse: collapse;
+
+width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+#problems_container{
+margin: auto;
+height:100%;
+border-style: solid;
+width: 80%;
+    border-width: 1px;
+}
+
+</style>
+
+<script src="{% static 'js/dashboard.js' %}" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="{% static 'css/header.css' %}" />
+
+
+</head>
+<body>
+{% csrf_token %}
+
+<h1>Triumph Code</h1>
+
+<div class="navbar">
+  <a class="active" href="http://localhost:8000/dashboard/">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Solve Questions
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="http://localhost:8000/dashboard/problems/?level=easy" id="easyproblems">Easy</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=medium" id="mediumproblems">Medium</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=advanced" id="advancedproblems">Advanced</a>
+
+    </div>
+  </div>
+
+  <a href="http://localhost:8000/dashboard/Tutorials/">Tutorials</a>
+  <a href="http://localhost:8000/dashboard/Contest/">Contest</a>
+  <a href="http://localhost:8000/dashboard/CompileAndRun/">Compile & Run</a>
+  <a href="http://localhost:8000/dashboard/About">About</a>
+  <a href="http://localhost:8000/dashboard/profile">Profile</a>
+  <a href="http://localhost:8000/dashboard/status">Status</a>
+  <!--<div class="dropdown">-->
+    <!--<button class="dropbtn">Profile -->
+      <!--<i class="fa fa-caret-down"></i>-->
+    <!--</button>-->
+    <!--<div class="dropdown-content">-->
+      <!--<a href="#">View Profile</a>-->
+      <!--<a href="#">View Solved Questions</a>-->
+      <!--<a href="logout">Logout</a>-->
+    <!--</div>-->
+   <a href="logout">Logout</a>
+  </div>
+</div>
+
+<h1 id="kutta" style="display:none">{{data}}</h1>
+
+<p id="abc"></p>
+
+<div id="problems_container">
+
+
+</div>
+
+</body>
+</html>

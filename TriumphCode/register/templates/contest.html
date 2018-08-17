@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script  src="{% static 'js/contest.js' %}" type="text/javascript" charset="utf-8"></script>
+
+
+    <script src="{% static 'js/dashboard.js' %}" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+    <style>
+       body {
+          font-family: "Comic Sans MS", cursive, sans-serif;
+          font-size:100%;
+          width:80%;
+          margin:auto;
+          background-color: #ebebe0;
+       }
+
+       #contest_des{
+          margin:auto;
+          width:45%;
+          height:25%;
+          text-align: center;
+
+       }
+
+       #special box{
+         border:2px solid black;
+       }
+       #abc1{
+          padding:20px;
+       }
+
+       button{
+          position: static;
+          margin: -160px 0px 500px 400px;
+       }
+
+       a.button_a{
+            background-color: #80aaff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 140px;
+            border: none;
+            cursor: pointer;
+            width: 40%;
+        }
+
+        a.button_a:hover {
+            opacity: 0.8;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+           {% csrf_token %}
+           <h1>Triumph Code</h1>
+
+
+<div class="navbar">
+  <a class="active" href="http://localhost:8000/dashboard/">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Solve Questions
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="http://localhost:8000/dashboard/problems/?level=easy" id="easyproblems">Easy</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=medium" id="mediumproblems">Medium</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=advanced" id="advancedproblems">Advanced</a>
+
+    </div>
+  </div>
+
+  <a href="http://localhost:8000/dashboard/Tutorials/">Tutorials</a>
+  <a href="http://localhost:8000/dashboard/Contest/">Contest</a>
+  <a href="http://localhost:8000/dashboard/CompileAndRun/">Compile & Run</a>
+  <a href="http://localhost:8000/dashboard/About">About</a>
+  <a href="http://localhost:8000/dashboard/profile">Profile</a>
+  <a href="http://localhost:8000/dashboard/status">Status</a>
+  <!--<div class="dropdown">-->
+    <!--<button class="dropbtn">Profile -->
+      <!--<i class="fa fa-caret-down"></i>-->
+    <!--</button>-->
+    <!--<div class="dropdown-content">-->
+      <!--<a href="#">View Profile</a>-->
+      <!--<a href="#">View Solved Questions</a>-->
+      <!--<a href="logout">Logout</a>-->
+    <!--</div>-->
+   <a href="logout">Logout</a>
+  </div>
+</div>
+
+
+           <h2 id="contest" style="display:none">{{data}}</h2>
+           <div class="container">
+
+                    <div id="contest_des">
+
+                    </div>
+
+
+           </div>
+
+
+
+
+</body>
+</html>

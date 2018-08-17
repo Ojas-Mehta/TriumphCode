@@ -1,0 +1,221 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stacks</title>
+</head>
+<body>
+        <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+	<div class="center"><h1>Stacks </h1></div>
+    <div class="boxing">
+        <h2>Introduction</h2><br>
+	<p>Stacks are dynamic data structures that follow the <strong>Last In First Out (LIFO)</strong> principle. The last item to be inserted into a stack is the first one to be deleted from it. </p>
+<p>For example, you have a stack of trays on a table. The tray at the top of the stack is the first item to be moved if you require a tray from that stack.</p>
+<h2>Inserting and deleting elements</h2>
+<p>Stacks have restrictions on the insertion and deletion of elements. Elements can be inserted or deleted only from one end of the stack i.e. from the top. The element at the top is called the top element. The operations of inserting and deleting elements are called push() and pop() respectively. </p>
+<p>When the top element of a stack is deleted, if the stack remains non-empty, then the element just below the previous top element becomes the new top element of the stack. </p>
+<p>For example, in the stack of trays, if you take the tray on the top and do not replace it, then the second tray automatically becomes the top element (tray) of that stack.</p>
+<h2>Features of stacks</h2><br>
+<ul>
+<li>Dynamic data structures</li>
+<li>Do not have a fixed size</li>
+<li>Do not consume a fixed amount of memory</li>
+<li>Size of stack changes with each push() and pop() operation. Each push() and pop() operation increases and decreases the size of the stack by 1, respectively.</li>
+</ul>
+<p>A stack can be visualized as follows:</p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/9a74c87.png" /></p>
+<h2>Operations</h2>
+<br>
+
+<p><strong>push( x )</strong>: Insert element x at the top of a stack</p>
+
+<div class="boxed"><pre><font size="4"><code>void push (int stack[ ] , int x , int n) {
+ if ( top == n-1 ) {         //If the top position is the last of position in a stack, this means that the stack is full
+    cout &lt;&lt; “Stack is full.Overflow condition!” ;
+    }
+    else{
+        top = top +1 ;            //Incrementing top position 
+        stack[ top ] = x ;       //Inserting element on incremented position  
+    }
+}
+</code></pre></div></font>
+<p><strong>pop( )</strong>: Removes an element from the top of a stack</p>
+<div class="boxed"><pre><font size="4"><code>   void pop (int stack[ ] ,int n ) 
+    {
+
+        if( isEmpty ( ) )
+        {
+            cout &lt;&lt; “Stack is empty. Underflow condition! ” &lt;&lt; endl ;
+        }
+        else    
+        {
+             top = top - 1 ; //Decrementing top’s position will detach last element from stack            
+        }
+    }
+</code></font></pre></div>
+<p><strong>topElement ( )</strong>: Access the top element of a stack</p>
+<div class="boxed"><pre><font size="4"><code>  int topElement ( )
+    {
+        return stack[ top ];
+    }
+</code></font></pre></div>
+<p><strong>isEmpty ( ) :</strong> Check whether a stack is empty</p>
+<div class="boxed"><pre><font size="4"><code>    bool isEmpty ( )
+    {
+        if ( top == -1 )  //Stack is empty
+        return true ; 
+        else
+        return false;
+    }
+</code></font></pre></div>
+<p><strong>size ( )</strong>: Determines the current size of a stack</p>
+<div class="boxed"><pre><font size="4"><code>  int size ( )
+    {
+        return top + 1;
+    }
+</code></font></pre></div>
+<p><strong>Implementation</strong></p>
+<div class="boxed"><pre><font size="4"><code>#include &lt;iostream&gt;
+using namespace std;
+int top = -1; //Globally defining the value of top as the stack is empty
+
+    void push (int stack[ ] , int x , int n)
+    {
+        if ( top == n-1 )       //If the top position is the last of position of the stack, this means that the stack is full.
+        {
+            cout &lt;&lt; "Stack is full.Overflow condition!" ;
+        }
+        else
+        {
+            top = top +1 ;            //Incrementing the top position 
+            stack[ top ] = x ;       //Inserting an element on incremented position  
+        }
+    }
+    bool isEmpty ( )
+    {
+        if ( top == -1 )  //Stack is empty
+            return true ; 
+        else
+            return false;
+    }
+    void pop ( ) 
+    {
+
+        if( isEmpty ( ) )
+        {
+            cout &lt;&lt; "Stack is empty. Underflow condition! " &lt;&lt; endl ;
+        }
+        else    
+        {
+             top = top - 1 ; //Decrementing top’s position will detach last element from stack            
+        }
+    }
+    int size ( )
+    {
+        return top + 1;
+    }
+    int topElement (int stack[])
+    {
+        return stack[ top ];
+    }
+    //Let's implement these functions on the stack given above 
+
+    int main( )
+    {
+        int stack[ 3 ];
+        // pushing element 5 in the stack .
+        push(stack , 5 , 3 ) ;
+
+        cout &lt;&lt; "Current size of stack is " &lt;&lt; size ( ) &lt;&lt; endl ;
+
+        push(stack , 10 , 3);
+        push (stack , 24 , 3) ;
+
+        cout &lt;&lt; "Current size of stack is " &lt;&lt; size( ) &lt;&lt; endl ;
+
+        //As the stack is full, further pushing will show an overflow condition.
+        push(stack , 12 , 3) ;
+
+        //Accessing the top element
+        cout &lt;&lt; "The current top element in stack is " &lt;&lt; topElement(stack) &lt;&lt; endl;
+
+        //Removing all the elements from the stack
+        for(int i = 0 ; i &lt; 3;i++ )
+            pop( );
+        cout &lt;&lt; "Current size of stack is " &lt;&lt; size( ) &lt;&lt; endl ;
+
+        //As the stack is empty , further popping will show an underflow condition.
+        pop ( );  
+
+    }
+</code></pre></div></font><br><br>
+<h2>Output</h2><br>
+<ul>
+<li>Current size of stack: 1</li>
+<li>Current size of stack: 3</li>
+<li>Current top element in stack: 24 (Stack is full. Overflow condition!)</li>
+<li>Current size of stack: 0 (Stack is empty. Underflow condition!)</li>
+</ul>
+<p>Refer to the following image for more information about the operations performed in the code.</p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/2f9b01a.png" /></p>
+<h2>Application</h2>
+<p>Consider the balanced parentheses problem.</p>
+<p>You have a bracket sequence made up of opening '(' and closing ')' parentheses. You must check if this bracket sequence is balanced.</p>
+<p>A bracket sequence is considered balanced if for every prefix of the sequence, the number of opening brackets is greater than or equal to the number of closing brackets, and  the total number of opening brackets is equal to the number of closing brackets.</p>
+<p>You can check this using stack. Let's see how.</p>
+<p>You can maintain a stack where you store a parenthesis. Whenever, you come across an opening parenthesis, $$push$$ it in the stack. However, whenever you come across a closing parenthesis, pop a parenthesis from the stack. </p>
+<div class="boxed"><pre><font size="4"><code>    #include &lt;iostream&gt;
+    using namespace std;
+    int top;
+    void  check (char str[ ], int n, char stack [ ])
+    {
+        for(int i = 0 ; i &lt; n ; i++ )
+        {
+            if (str [ i ] == ‘(’)
+            {
+                top = top + 1;
+                stack[ top ] = ‘ ( ’;
+            }
+            if(str[ i ] == ‘)’ )
+            {
+                if(top == -1 )
+                {
+                    top = top -1 ;
+                    break ;
+                 }
+                else
+                {
+                     top = top -1 ;
+                }
+            }
+        }
+        if(top == -1)
+            cout &lt;&lt; “String is balanced!” &lt;&lt; endl;
+        else
+            cout &lt;&lt; “String is unbalanced!” &lt;&lt; endl ;
+    }
+
+    int main ( ) 
+    {
+        //balanced parenthesis string.
+        char str[  ] = { ‘(‘ , ‘a’ , ‘+’, ‘ ( ’, ‘b ’ , ‘-’ , ‘ c’ ,‘)’ , ‘ ) ’} ;
+
+        // unbalanced string . 
+        char str1 [ ] = { ‘(’ , ‘(’ , ‘a’ , ‘ + ’ , ‘ b’ , ‘)’ } ;
+        char stack [ 15 ] ;
+        top = -1;   
+        check (str , 9 , stack );      //Passing balanced string   
+        top = -1 ;
+        check(str1 , 5 , stack) ;    //Passing unbalanced string
+        return 0;
+
+    } 
+</code></pre></font></div><br>
+<br><h2>Output</h2><br>
+<div class="boxed"><pre><font size="4"><code>String is balanced!  
+String is unbalanced!
+</code></pre></font></div>
+
+</div>
+</body>
+</html>

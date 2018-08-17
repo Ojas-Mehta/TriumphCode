@@ -1,0 +1,88 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Linklist</title>
+</head>
+<body>
+        <link href="{% static 'tutorial/CSS.css' %}" rel="stylesheet" type="text/css">
+	<div class="center"><h1>LinkList  </h1></div>
+    <div class="boxing">
+        <h2>Introduction</h2><br>
+	<p>A <strong>linked list</strong> is a way to store a collection of elements. Like an array these can be character or integers. Each element in a linked list is stored in the form of a <strong>node</strong>.  </p>
+<p><strong><span style="text-decoration: underline; color: black;">Node</strong>:</p></span>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/1b099fd.png" /></p>
+<p>A node is a collection of two sub-elements or parts. A <strong>data</strong> part that stores the element and a <strong>next</strong> part that stores the link to the next node.  </p>
+<p><strong><span style="text-decoration: underline; color: black;">Linked List</strong></span></p>
+<p><img alt="enter image description here" src="https://he-s3.s3.amazonaws.com/media/uploads/1b76d10.png" /></p>
+<p>A linked list is formed when many such nodes are linked together to form a chain. Each node points to the next node present in the order. The first node is always used as a reference to traverse the list and is called <strong>HEAD</strong>. The last node points to <strong>NULL</strong>.  </p>
+<h2>Declaring a Linked list</h2>
+<p>In C language, a linked list can be implemented using structure  and pointers .</p>
+<div class="boxed"><pre><font size="4"><code>struct LinkedList{
+    int data;
+    struct LinkedList *next;
+ };
+</code></pre></div></font>
+<p>The above definition is used to create every node in the list. The <strong>data</strong> field stores the element and the  <strong>next</strong> is a pointer to store the address of the next node. </p>
+<p>Noticed something unusual with next? </p>
+<p>In place of a data type, <strong>struct LinkedList</strong> is written before next. That's because its a <strong>self-referencing pointer</strong>.  It means a pointer that points to whatever it is a part of. Here <strong>next</strong> is a part of a node and it will point to the next node.</p>
+<h2>Creating a Node</h2>
+<p>Let's define a data type of <code> struct LinkedList </code>to make code cleaner.  </p>
+<div class="boxed"><pre><font size="4"><code>typedef struct LinkedList *node; //Define node as pointer of data type struct LinkedList
+
+node createNode(){
+    node temp; // declare a node
+    temp = (node)malloc(sizeof(struct LinkedList)); // allocate memory using malloc()
+    temp-&gt;next = NULL;// make next point to NULL
+    return temp;//return the new node
+}
+</code></pre></div></font>
+<blockquote>
+<p><strong>typedef</strong> is used to define a data type in C.</p>
+<p><strong>malloc()</strong> is used to dynamically allocate a single block of memory in C, it is available in the header file <code>stdlib.h</code>.</p>
+<p><strong>sizeof()</strong> is used to determine size in bytes of an element in C. Here it is used to determine size of each node and sent as a parameter to <code>malloc</code>.</p>
+</blockquote>
+<p>The above code will create a node with data as value and next pointing to NULL.</p>
+<h2>Let's see how to <strong>add a node to the linked list : </h2>
+    <br>
+<div class="boxed"><pre><code>node addNode(node head, int value){
+    node temp,p;// declare two nodes temp and p
+    temp = createNode();//createNode will return a new node with data = value and next pointing to NULL.
+    temp-&gt;data = value; // add element's value to data part of node
+    if(head == NULL){
+        head = temp;     //when linked list is empty
+    }
+    else{
+        p  = head;//assign head to p 
+        while(p-&gt;next != NULL){
+            p = p-&gt;next;//traverse the list until p is the last node.The last node always points to NULL.
+        }
+        p-&gt;next = temp;//Point the previous last node to the new node created.
+    }
+    return head;
+}
+</code></pre></div>
+<p>Here the new node will always be added after the last node. This is known as <strong>inserting a node at the rear end</strong>.</p>
+<blockquote>
+<p><strong>Food for thought</strong></p>
+<p>This type of linked list is known as <strong>simple or singly linked list</strong>.
+A simple linked list can be traversed in only one direction from
+<strong>head</strong> to the last node.</p>
+<p>The last node is checked by the condition : </p>
+<pre><code>p-&gt;next = NULL;
+</code></pre>
+<p>Here  -&gt;</code> is used to access <strong>next</strong> sub element of node p.
+<strong>NULL</strong> denotes no node exists after the current node , i.e. its the end of the list.</p>
+</blockquote>
+<p><strong>Traversing the list</strong>:</p>
+<p>The linked list can be traversed in a while loop by using the <strong>head</strong> node as a starting reference: </p>
+<div class="boxed"><pre><font size="4"><code>node p;
+p = head;
+while(p != NULL){
+    p = p-&gt;next;
+}</code></font>
+</pre></div>
+</div>
+
+</body>
+</html>

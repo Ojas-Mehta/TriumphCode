@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>TriumphCode</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <style>
+
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            width:80%;
+            margin:auto;
+
+
+        }
+
+    /* Full-width input fields */
+input[type=text], input[type=password], input[type=email] {
+    width: 60%;
+    padding: 8px;
+    margin: auto;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+    /* Set a style for all buttons */
+        button {
+            background-color: #80aaff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 200px;
+            border: none;
+            cursor: pointer;
+            width: 20%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .content container{
+            widht:60%;
+            margin:auto;
+            border: 2px solid red;
+            border-radius: 8px;
+            border-style: solid;
+            border-width: 5px;
+        }
+
+    </style>
+    </head>
+    <body>
+        <body>
+            <div class="page-header">
+                <h1 style="text-align: center;"><a href="/">TriumphCode</a></h1>
+            </div>
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% csrf_token %}
+                        <h2>Sign up</h2>
+                        {% csrf_token %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <p>
+                          {{ field.label_tag }}<br>
+                            {{ field }}
+                            {% if field.help_text %}
+                  <small style="color: rgb(0, 204, 0)">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </body>
+    </body>
+</html>

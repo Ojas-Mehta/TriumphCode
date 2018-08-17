@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container"></div>
+<p><h1> my  profile</h1>
+    username:{{ user.username }}<br><br>
+    first name: {{ user.first_name }}<br><br>
+    last name:  {{ user.last_name }}<br><br>
+     email: {{ user.email }}<br><br>
+
+<a href="/dashboard/profile/editprofile"><button>Edit profile</button></a>
+</p>
+</div>
+{% endblock %}

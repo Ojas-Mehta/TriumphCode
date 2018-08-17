@@ -1,0 +1,96 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Status</title>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+
+        <script src="{% static 'js/user_status.js' %}" type="text/javascript" charset="utf-8"></script>
+ <style>
+
+html{
+    height:auto;
+}
+
+  body {
+       font-family: "Comic Sans MS", cursive, sans-serif;
+       font-size:100%;
+       width:80%;
+       margin:auto;
+       background-color: #ebebe0;
+  }
+table {
+    border: 1px;
+    border-radius: 5px;
+border-collapse: collapse;
+
+width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+
+</style>
+
+    </head>
+    <body>
+<h1>Triumph Code</h1>
+
+        <div class="navbar">
+  <a class="active" href="http://localhost:8000/dashboard/">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Solve Questions
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="http://localhost:8000/dashboard/problems/?level=easy" id="easyproblems">Easy</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=medium" id="mediumproblems">Medium</a>
+      <a href="http://localhost:8000/dashboard/problems/?level=advanced" id="advancedproblems">Advanced</a>
+
+    </div>
+  </div>
+
+  <a href="http://localhost:8000/dashboard/Tutorials/">Tutorials</a>
+  <a href="http://localhost:8000/dashboard/Contest/">Contest</a>
+  <a href="http://localhost:8000/dashboard/CompileAndRun/">Compile & Run</a>
+  <a href="http://localhost:8000/dashboard/About">About</a>
+  <a href="http://localhost:8000/dashboard/profile">Profile</a>
+  <a href="http://localhost:8000/dashboard/status">Status</a>
+  <!--<div class="dropdown">-->
+    <!--<button class="dropbtn">Profile -->
+      <!--<i class="fa fa-caret-down"></i>-->
+    <!--</button>-->
+    <!--<div class="dropdown-content">-->
+      <!--<a href="#">View Profile</a>-->
+      <!--<a href="#">View Solved Questions</a>-->
+      <!--<a href="logout">Logout</a>-->
+    <!--</div>-->
+   <a href="logout">Logout</a>
+  </div>
+        </div>
+
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <h2>Problem and Competition Status</h2>
+
+                        <p id="p_status" style="display:none">{{ problemStatus }}</p>
+                        <p id="c_status" style="display:none">{{ competitionStatus }}</p>
+                        <div id="data1"></div>
+                        <br>
+                        <div id="data2"></div>
+
+                    </div>
+                </div>
+            </div>
+
+    </body>
+</html>
